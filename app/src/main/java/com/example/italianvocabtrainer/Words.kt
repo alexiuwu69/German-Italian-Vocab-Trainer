@@ -14,6 +14,6 @@ fun getWords(): List<Word> {
         Word("trinkbar", "potabile"),
         Word("hilfsbereit", "aiutevole")
     )
-
+    // TODO: More words
     return words
 }
