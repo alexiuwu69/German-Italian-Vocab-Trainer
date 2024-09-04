@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.italianvocabtrainer.AppState
-import com.example.italianvocabtrainer.Word
+import com.example.italianvocabtrainer.WordPair
 
 @Composable
 fun Search(appState: AppState, innerPadding: PaddingValues) {
@@ -36,7 +36,7 @@ fun Search(appState: AppState, innerPadding: PaddingValues) {
             onValueChange = { searchTerm = it },
             modifier = Modifier.height(55.dp))
 
-        WordRow(wordPair = Word("German", "Italian"))
+        WordRow(wordPair = WordPair("German", "Italian"))
         
         for (word in appState.wordList) {
             if (searchTerm.lowercase() in word.german.lowercase() ||
@@ -48,7 +48,7 @@ fun Search(appState: AppState, innerPadding: PaddingValues) {
 }
 
 @Composable
-fun WordRow(wordPair: Word) {
+fun WordRow(wordPair: WordPair) {
     Row(modifier = Modifier.fillMaxWidth()
         .padding(horizontal = 10.dp),
         horizontalArrangement = Arrangement.SpaceBetween
