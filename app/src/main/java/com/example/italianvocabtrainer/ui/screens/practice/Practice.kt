@@ -15,6 +15,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.italianvocabtrainer.AppState
@@ -32,7 +34,8 @@ fun Practice(appState: AppState, innerPadding: PaddingValues) {
 
         Spacer(modifier = Modifier.height(100.dp))
         
-        Button(modifier = Modifier.size(width = 150.dp, height = 70.dp),
+        Button(
+            modifier = Modifier.size(width = 150.dp, height = 70.dp),
             onClick = {
             appState.changeCurrentWordPairToRandom()
             appState.showSolution = false
@@ -56,10 +59,23 @@ fun VocabCard(appState: AppState) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = appState.currentWordPair.value.first, fontSize = 40.sp)
+                Text(
+                    text = appState.currentWordPair.value.first,
+                    fontSize = 25.sp, // still can lead to problems regarding long words/phrases
+                    style = TextStyle(lineBreak = getLineBreakSettings())
+                )
 
                 if (appState.showSolution)
-                    Text(appState.currentWordPair.value.second, fontSize = 40.sp)
+                    Text(
+                        text = appState.currentWordPair.value.second,
+                        fontSize = 25.sp, // same as above
+                        style = TextStyle(lineBreak = getLineBreakSettings())
+                    )
             }
         }
 }
+
+fun getLineBreakSettings() = LineBreak( // probably needs a rework
+        strategy = LineBreak.Strategy.HighQuality,
+        strictness = LineBreak.Strictness.Normal,
+        wordBreak = LineBreak.WordBreak.Phrase)
